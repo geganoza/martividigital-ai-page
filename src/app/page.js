@@ -122,45 +122,62 @@ export default function Home() {
     </div>
   );
 
+  // Sample video filenames - replace with your actual uploaded videos
+  const horizontalVideos = [
+    "/videos/horizontal-1.mp4", "/videos/horizontal-2.mp4", "/videos/horizontal-3.mp4",
+    "/videos/horizontal-4.mp4", "/videos/horizontal-5.mp4", "/videos/horizontal-6.mp4",
+    "/videos/horizontal-7.mp4", "/videos/horizontal-8.mp4", "/videos/horizontal-9.mp4",
+    "/videos/horizontal-10.mp4", "/videos/horizontal-11.mp4", "/videos/horizontal-12.mp4",
+    "/videos/horizontal-13.mp4", "/videos/horizontal-14.mp4", "/videos/horizontal-15.mp4",
+    "/videos/horizontal-16.mp4"
+  ];
+
+  const verticalVideos = [
+    "/videos/vertical-1.mp4", "/videos/vertical-2.mp4", "/videos/vertical-3.mp4",
+    "/videos/vertical-4.mp4", "/videos/vertical-5.mp4", "/videos/vertical-6.mp4",
+    "/videos/vertical-7.mp4", "/videos/vertical-8.mp4", "/videos/vertical-9.mp4",
+    "/videos/vertical-10.mp4", "/videos/vertical-11.mp4", "/videos/vertical-12.mp4"
+  ];
+
   // Video data arrays - 7 videos each (2H + 3V + 2H pattern)
   const videoSet1 = [
-    { title: "AI Brand Campaign", src: null, poster: null },        // Horizontal 1
-    { title: "Product Showcase", src: null, poster: null },         // Horizontal 2
-    { title: "Social Media Ad", src: null, poster: null },          // Vertical 1
-    { title: "E-commerce Spot", src: null, poster: null },          // Vertical 2
-    { title: "Corporate Video", src: null, poster: null },          // Vertical 3
-    { title: "Brand Identity", src: null, poster: null },           // Horizontal 3
-    { title: "Marketing Campaign", src: null, poster: null }        // Horizontal 4
+    { title: "AI Brand Campaign", src: horizontalVideos[0], poster: null },        // Horizontal 1
+    { title: "Product Showcase", src: horizontalVideos[1], poster: null },         // Horizontal 2
+    { title: "Social Media Ad", src: verticalVideos[0], poster: null },            // Vertical 1
+    { title: "E-commerce Spot", src: verticalVideos[1], poster: null },            // Vertical 2
+    { title: "Corporate Video", src: verticalVideos[2], poster: null },            // Vertical 3
+    { title: "Brand Identity", src: horizontalVideos[2], poster: null },           // Horizontal 3
+    { title: "Marketing Campaign", src: horizontalVideos[3], poster: null }        // Horizontal 4
   ];
 
   const videoSet2 = [
-    { title: "Motion Graphics", src: null, poster: null },          // Horizontal 1
-    { title: "Logo Animation", src: null, poster: null },           // Horizontal 2
-    { title: "Instagram Story", src: null, poster: null },          // Vertical 1
-    { title: "YouTube Pre-roll", src: null, poster: null },         // Vertical 2
-    { title: "TikTok Ad", src: null, poster: null },                // Vertical 3
-    { title: "Facebook Ad", src: null, poster: null },              // Horizontal 3
-    { title: "LinkedIn Content", src: null, poster: null }          // Horizontal 4
+    { title: "Motion Graphics", src: horizontalVideos[4], poster: null },          // Horizontal 1
+    { title: "Logo Animation", src: horizontalVideos[5], poster: null },           // Horizontal 2
+    { title: "Instagram Story", src: verticalVideos[3], poster: null },            // Vertical 1
+    { title: "YouTube Pre-roll", src: verticalVideos[4], poster: null },           // Vertical 2
+    { title: "TikTok Ad", src: verticalVideos[5], poster: null },                  // Vertical 3
+    { title: "Facebook Ad", src: horizontalVideos[6], poster: null },              // Horizontal 3
+    { title: "LinkedIn Content", src: horizontalVideos[7], poster: null }          // Horizontal 4
   ];
 
   const videoSet3 = [
-    { title: "AI Testimonial", src: null, poster: null },           // Horizontal 1
-    { title: "Product Demo", src: null, poster: null },             // Horizontal 2
-    { title: "Brand Story", src: null, poster: null },              // Vertical 1
-    { title: "Event Promo", src: null, poster: null },              // Vertical 2
-    { title: "Service Explainer", src: null, poster: null },        // Vertical 3
-    { title: "Customer Journey", src: null, poster: null },         // Horizontal 3
-    { title: "Success Metrics", src: null, poster: null }           // Horizontal 4
+    { title: "AI Testimonial", src: horizontalVideos[8], poster: null },           // Horizontal 1
+    { title: "Product Demo", src: horizontalVideos[9], poster: null },             // Horizontal 2
+    { title: "Brand Story", src: verticalVideos[6], poster: null },                // Vertical 1
+    { title: "Event Promo", src: verticalVideos[7], poster: null },                // Vertical 2
+    { title: "Service Explainer", src: verticalVideos[8], poster: null },          // Vertical 3
+    { title: "Customer Journey", src: horizontalVideos[10], poster: null },        // Horizontal 3
+    { title: "Success Metrics", src: horizontalVideos[11], poster: null }          // Horizontal 4
   ];
 
   const videoSet4 = [
-    { title: "App Launch", src: null, poster: null },               // Horizontal 1
-    { title: "Holiday Campaign", src: null, poster: null },         // Horizontal 2
-    { title: "Recruitment Ad", src: null, poster: null },           // Vertical 1
-    { title: "Partnership Announce", src: null, poster: null },     // Vertical 2
-    { title: "Success Story", src: null, poster: null },            // Vertical 3
-    { title: "Company Culture", src: null, poster: null },          // Horizontal 3
-    { title: "Future Vision", src: null, poster: null }             // Horizontal 4
+    { title: "App Launch", src: horizontalVideos[12], poster: null },              // Horizontal 1
+    { title: "Holiday Campaign", src: horizontalVideos[13], poster: null },        // Horizontal 2
+    { title: "Recruitment Ad", src: verticalVideos[9], poster: null },             // Vertical 1
+    { title: "Partnership Announce", src: verticalVideos[10], poster: null },      // Vertical 2
+    { title: "Success Story", src: verticalVideos[11], poster: null },             // Vertical 3
+    { title: "Company Culture", src: horizontalVideos[14], poster: null },         // Horizontal 3
+    { title: "Future Vision", src: horizontalVideos[15], poster: null }            // Horizontal 4
   ];
 
   return (
