@@ -34,8 +34,7 @@ export default function Home() {
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
-                  preload="none"
-                  poster={video.poster}
+                  preload="metadata"
                   onError={(e) => {
                     console.error('Video error:', video.src, e);
                   }}
@@ -66,8 +65,7 @@ export default function Home() {
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
-                  preload="none"
-                  poster={video.poster}
+                  preload="metadata"
                   onError={(e) => {
                     console.error('Video error:', video.src, e);
                   }}
@@ -98,8 +96,7 @@ export default function Home() {
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
-                  preload="none"
-                  poster={video.poster}
+                  preload="metadata"
                   onError={(e) => {
                     console.error('Video error:', video.src, e);
                   }}
