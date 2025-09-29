@@ -35,8 +35,20 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
+                  crossOrigin="anonymous"
+                  onLoadedMetadata={(e) => {
+                    console.log('Video metadata loaded:', video.src);
+                    // Set current time to 1 second to get a better thumbnail
+                    e.target.currentTime = 1;
+                  }}
+                  onLoadedData={(e) => {
+                    console.log('Video data loaded:', video.src);
+                  }}
                   onError={(e) => {
-                    console.error('Video error:', video.src, e);
+                    console.error('Video error:', video.src, e.target.error);
+                  }}
+                  onCanPlay={(e) => {
+                    console.log('Video can play:', video.src);
                   }}
                 >
                   <source src={video.src} type="video/mp4" />
@@ -66,8 +78,20 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
+                  crossOrigin="anonymous"
+                  onLoadedMetadata={(e) => {
+                    console.log('Video metadata loaded:', video.src);
+                    // Set current time to 1 second to get a better thumbnail
+                    e.target.currentTime = 1;
+                  }}
+                  onLoadedData={(e) => {
+                    console.log('Video data loaded:', video.src);
+                  }}
                   onError={(e) => {
-                    console.error('Video error:', video.src, e);
+                    console.error('Video error:', video.src, e.target.error);
+                  }}
+                  onCanPlay={(e) => {
+                    console.log('Video can play:', video.src);
                   }}
                 >
                   <source src={video.src} type="video/mp4" />
@@ -97,8 +121,20 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
+                  crossOrigin="anonymous"
+                  onLoadedMetadata={(e) => {
+                    console.log('Video metadata loaded:', video.src);
+                    // Set current time to 1 second to get a better thumbnail
+                    e.target.currentTime = 1;
+                  }}
+                  onLoadedData={(e) => {
+                    console.log('Video data loaded:', video.src);
+                  }}
                   onError={(e) => {
-                    console.error('Video error:', video.src, e);
+                    console.error('Video error:', video.src, e.target.error);
+                  }}
+                  onCanPlay={(e) => {
+                    console.log('Video can play:', video.src);
                   }}
                 >
                   <source src={video.src} type="video/mp4" />
