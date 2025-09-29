@@ -35,6 +35,8 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
+                  playsInline
+                  muted
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -63,6 +65,8 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
+                  playsInline
+                  muted
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -91,6 +95,8 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
+                  playsInline
+                  muted
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
