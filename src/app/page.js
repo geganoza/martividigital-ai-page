@@ -261,14 +261,14 @@ export default function Home() {
   for (let i = 0; i < 12; i++) {
     const videoIndex = i % actualVerticalVideos.length;
     const encodedFilename = encodeURIComponent(actualVerticalVideos[videoIndex]);
-    finalVerticalVideos.push(`/videos/${encodedFilename}`);
+    finalVerticalVideos.push(`https://martividigital.com/ai/videos/${encodedFilename}`);
   }
 
   // Fill horizontal slots (need 16) - cycle through horizontal videos and URL encode filenames
   for (let i = 0; i < 16; i++) {
     const videoIndex = i % actualHorizontalVideos.length;
     const encodedFilename = encodeURIComponent(actualHorizontalVideos[videoIndex]);
-    finalHorizontalVideos.push(`/videos/${encodedFilename}`);
+    finalHorizontalVideos.push(`https://martividigital.com/ai/videos/${encodedFilename}`);
   }
 
   // Video data arrays - 7 videos each (2H + 3V + 2H pattern)
