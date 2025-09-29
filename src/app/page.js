@@ -257,16 +257,18 @@ export default function Home() {
   const finalVerticalVideos = [];
   const finalHorizontalVideos = [];
 
-  // Fill vertical slots (need 12) - repeat the one vertical video
+  // Fill vertical slots (need 12) - repeat videos and URL encode filenames
   for (let i = 0; i < 12; i++) {
     const videoIndex = i % actualVerticalVideos.length;
-    finalVerticalVideos.push(`/videos/${actualVerticalVideos[videoIndex]}`);
+    const encodedFilename = encodeURIComponent(actualVerticalVideos[videoIndex]);
+    finalVerticalVideos.push(`/videos/${encodedFilename}`);
   }
 
-  // Fill horizontal slots (need 16) - cycle through horizontal videos
+  // Fill horizontal slots (need 16) - cycle through horizontal videos and URL encode filenames
   for (let i = 0; i < 16; i++) {
     const videoIndex = i % actualHorizontalVideos.length;
-    finalHorizontalVideos.push(`/videos/${actualHorizontalVideos[videoIndex]}`);
+    const encodedFilename = encodeURIComponent(actualHorizontalVideos[videoIndex]);
+    finalHorizontalVideos.push(`/videos/${encodedFilename}`);
   }
 
   // Video data arrays - 7 videos each (2H + 3V + 2H pattern)
