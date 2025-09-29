@@ -29,17 +29,13 @@ export default function Home() {
         {/* Row 1: 2 Horizontal Videos Side by Side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {horizontalVideos1.map((video, index) => (
-            <div key={index} className="relative overflow-hidden rounded-lg bg-black/40 aspect-video">
+            <div key={index} className="relative overflow-hidden rounded-lg bg-black aspect-video">
               {video.src ? (
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
-                  preload="metadata"
+                  preload="none"
                   poster={video.poster}
-                  onLoadedMetadata={(e) => {
-                    // Set thumbnail to middle of video
-                    e.target.currentTime = e.target.duration / 2;
-                  }}
                   onError={(e) => {
                     console.error('Video error:', video.src, e);
                   }}
@@ -65,17 +61,13 @@ export default function Home() {
         {/* Row 2: 3 Vertical Videos Side by Side */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {verticalVideos.map((video, index) => (
-            <div key={index + 2} className="relative overflow-hidden rounded-lg bg-black/40 aspect-[9/16]">
+            <div key={index + 2} className="relative overflow-hidden rounded-lg bg-black aspect-[9/16]">
               {video.src ? (
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
-                  preload="metadata"
+                  preload="none"
                   poster={video.poster}
-                  onLoadedMetadata={(e) => {
-                    // Set thumbnail to middle of video
-                    e.target.currentTime = e.target.duration / 2;
-                  }}
                   onError={(e) => {
                     console.error('Video error:', video.src, e);
                   }}
@@ -101,17 +93,13 @@ export default function Home() {
         {/* Row 3: 2 Horizontal Videos Side by Side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {horizontalVideos2.map((video, index) => (
-            <div key={index + 5} className="relative overflow-hidden rounded-lg bg-black/40 aspect-video">
+            <div key={index + 5} className="relative overflow-hidden rounded-lg bg-black aspect-video">
               {video.src ? (
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
-                  preload="metadata"
+                  preload="none"
                   poster={video.poster}
-                  onLoadedMetadata={(e) => {
-                    // Set thumbnail to middle of video
-                    e.target.currentTime = e.target.duration / 2;
-                  }}
                   onError={(e) => {
                     console.error('Video error:', video.src, e);
                   }}
@@ -261,55 +249,65 @@ export default function Home() {
   for (let i = 0; i < 12; i++) {
     const videoIndex = i % actualVerticalVideos.length;
     const encodedFilename = encodeURIComponent(actualVerticalVideos[videoIndex]);
-    finalVerticalVideos.push(`https://martividigital.com/ai/videos/${encodedFilename}`);
+    const posterName = actualVerticalVideos[videoIndex].replace('.mp4', '.jpg');
+    const encodedPosterFilename = encodeURIComponent(posterName);
+    finalVerticalVideos.push({
+      src: `https://martividigital.com/ai/videos/${encodedFilename}`,
+      poster: `https://martividigital.com/ai/videos/thumbnails/${encodedPosterFilename}`
+    });
   }
 
   // Fill horizontal slots (need 16) - cycle through horizontal videos and URL encode filenames
   for (let i = 0; i < 16; i++) {
     const videoIndex = i % actualHorizontalVideos.length;
     const encodedFilename = encodeURIComponent(actualHorizontalVideos[videoIndex]);
-    finalHorizontalVideos.push(`https://martividigital.com/ai/videos/${encodedFilename}`);
+    const posterName = actualHorizontalVideos[videoIndex].replace('.mp4', '.jpg');
+    const encodedPosterFilename = encodeURIComponent(posterName);
+    finalHorizontalVideos.push({
+      src: `https://martividigital.com/ai/videos/${encodedFilename}`,
+      poster: `https://martividigital.com/ai/videos/thumbnails/${encodedPosterFilename}`
+    });
   }
 
   // Video data arrays - 7 videos each (2H + 3V + 2H pattern)
   const videoSet1 = [
-    { title: "AI Brand Campaign", src: finalHorizontalVideos[0], poster: null },        // Horizontal 1
-    { title: "Product Showcase", src: finalHorizontalVideos[1], poster: null },         // Horizontal 2
-    { title: "Social Media Ad", src: finalVerticalVideos[0], poster: null },            // Vertical 1
-    { title: "E-commerce Spot", src: finalVerticalVideos[1], poster: null },            // Vertical 2
-    { title: "Corporate Video", src: finalVerticalVideos[2], poster: null },            // Vertical 3
-    { title: "Brand Identity", src: finalHorizontalVideos[2], poster: null },           // Horizontal 3
-    { title: "Marketing Campaign", src: finalHorizontalVideos[3], poster: null }        // Horizontal 4
+    { title: "AI Brand Campaign", src: finalHorizontalVideos[0]?.src, poster: finalHorizontalVideos[0]?.poster },        // Horizontal 1
+    { title: "Product Showcase", src: finalHorizontalVideos[1]?.src, poster: finalHorizontalVideos[1]?.poster },         // Horizontal 2
+    { title: "Social Media Ad", src: finalVerticalVideos[0]?.src, poster: finalVerticalVideos[0]?.poster },            // Vertical 1
+    { title: "E-commerce Spot", src: finalVerticalVideos[1]?.src, poster: finalVerticalVideos[1]?.poster },            // Vertical 2
+    { title: "Corporate Video", src: finalVerticalVideos[2]?.src, poster: finalVerticalVideos[2]?.poster },            // Vertical 3
+    { title: "Brand Identity", src: finalHorizontalVideos[2]?.src, poster: finalHorizontalVideos[2]?.poster },           // Horizontal 3
+    { title: "Marketing Campaign", src: finalHorizontalVideos[3]?.src, poster: finalHorizontalVideos[3]?.poster }        // Horizontal 4
   ];
 
   const videoSet2 = [
-    { title: "Motion Graphics", src: finalHorizontalVideos[4], poster: null },          // Horizontal 1
-    { title: "Logo Animation", src: finalHorizontalVideos[5], poster: null },           // Horizontal 2
-    { title: "Instagram Story", src: finalVerticalVideos[3], poster: null },            // Vertical 1
-    { title: "YouTube Pre-roll", src: finalVerticalVideos[4], poster: null },           // Vertical 2
-    { title: "TikTok Ad", src: finalVerticalVideos[5], poster: null },                  // Vertical 3
-    { title: "Facebook Ad", src: finalHorizontalVideos[6], poster: null },              // Horizontal 3
-    { title: "LinkedIn Content", src: finalHorizontalVideos[7], poster: null }          // Horizontal 4
+    { title: "Motion Graphics", src: finalHorizontalVideos[4]?.src, poster: finalHorizontalVideos[4]?.poster },          // Horizontal 1
+    { title: "Logo Animation", src: finalHorizontalVideos[5]?.src, poster: finalHorizontalVideos[5]?.poster },           // Horizontal 2
+    { title: "Instagram Story", src: finalVerticalVideos[3]?.src, poster: finalVerticalVideos[3]?.poster },            // Vertical 1
+    { title: "YouTube Pre-roll", src: finalVerticalVideos[4]?.src, poster: finalVerticalVideos[4]?.poster },           // Vertical 2
+    { title: "TikTok Ad", src: finalVerticalVideos[5]?.src, poster: finalVerticalVideos[5]?.poster },                  // Vertical 3
+    { title: "Facebook Ad", src: finalHorizontalVideos[6]?.src, poster: finalHorizontalVideos[6]?.poster },              // Horizontal 3
+    { title: "LinkedIn Content", src: finalHorizontalVideos[7]?.src, poster: finalHorizontalVideos[7]?.poster }          // Horizontal 4
   ];
 
   const videoSet3 = [
-    { title: "AI Testimonial", src: finalHorizontalVideos[8], poster: null },           // Horizontal 1
-    { title: "Product Demo", src: finalHorizontalVideos[9], poster: null },             // Horizontal 2
-    { title: "Brand Story", src: finalVerticalVideos[6], poster: null },                // Vertical 1
-    { title: "Event Promo", src: finalVerticalVideos[7], poster: null },                // Vertical 2
-    { title: "Service Explainer", src: finalVerticalVideos[8], poster: null },          // Vertical 3
-    { title: "Customer Journey", src: finalHorizontalVideos[10], poster: null },        // Horizontal 3
-    { title: "Success Metrics", src: finalHorizontalVideos[11], poster: null }          // Horizontal 4
+    { title: "AI Testimonial", src: finalHorizontalVideos[8]?.src, poster: finalHorizontalVideos[8]?.poster },           // Horizontal 1
+    { title: "Product Demo", src: finalHorizontalVideos[9]?.src, poster: finalHorizontalVideos[9]?.poster },             // Horizontal 2
+    { title: "Brand Story", src: finalVerticalVideos[6]?.src, poster: finalVerticalVideos[6]?.poster },                // Vertical 1
+    { title: "Event Promo", src: finalVerticalVideos[7]?.src, poster: finalVerticalVideos[7]?.poster },                // Vertical 2
+    { title: "Service Explainer", src: finalVerticalVideos[8]?.src, poster: finalVerticalVideos[8]?.poster },          // Vertical 3
+    { title: "Customer Journey", src: finalHorizontalVideos[10]?.src, poster: finalHorizontalVideos[10]?.poster },        // Horizontal 3
+    { title: "Success Metrics", src: finalHorizontalVideos[11]?.src, poster: finalHorizontalVideos[11]?.poster }          // Horizontal 4
   ];
 
   const videoSet4 = [
-    { title: "App Launch", src: finalHorizontalVideos[12], poster: null },              // Horizontal 1
-    { title: "Holiday Campaign", src: finalHorizontalVideos[13], poster: null },        // Horizontal 2
-    { title: "Recruitment Ad", src: finalVerticalVideos[9], poster: null },             // Vertical 1
-    { title: "Partnership Announce", src: finalVerticalVideos[10], poster: null },      // Vertical 2
-    { title: "Success Story", src: finalVerticalVideos[11], poster: null },             // Vertical 3
-    { title: "Company Culture", src: finalHorizontalVideos[14], poster: null },         // Horizontal 3
-    { title: "Future Vision", src: finalHorizontalVideos[15], poster: null }            // Horizontal 4
+    { title: "App Launch", src: finalHorizontalVideos[12]?.src, poster: finalHorizontalVideos[12]?.poster },              // Horizontal 1
+    { title: "Holiday Campaign", src: finalHorizontalVideos[13]?.src, poster: finalHorizontalVideos[13]?.poster },        // Horizontal 2
+    { title: "Recruitment Ad", src: finalVerticalVideos[9]?.src, poster: finalVerticalVideos[9]?.poster },             // Vertical 1
+    { title: "Partnership Announce", src: finalVerticalVideos[10]?.src, poster: finalVerticalVideos[10]?.poster },      // Vertical 2
+    { title: "Success Story", src: finalVerticalVideos[11]?.src, poster: finalVerticalVideos[11]?.poster },             // Vertical 3
+    { title: "Company Culture", src: finalHorizontalVideos[14]?.src, poster: finalHorizontalVideos[14]?.poster },         // Horizontal 3
+    { title: "Future Vision", src: finalHorizontalVideos[15]?.src, poster: finalHorizontalVideos[15]?.poster }            // Horizontal 4
   ];
 
   return (
