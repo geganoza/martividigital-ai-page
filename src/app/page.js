@@ -36,8 +36,16 @@ export default function Home() {
                   controls
                   preload="metadata"
                   poster={video.poster}
+                  onLoadedMetadata={(e) => {
+                    // Set thumbnail to middle of video
+                    e.target.currentTime = e.target.duration / 2;
+                  }}
+                  onError={(e) => {
+                    console.error('Video error:', video.src, e);
+                  }}
                 >
                   <source src={video.src} type="video/mp4" />
+                  Your browser does not support the video tag.
                 </video>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -64,8 +72,16 @@ export default function Home() {
                   controls
                   preload="metadata"
                   poster={video.poster}
+                  onLoadedMetadata={(e) => {
+                    // Set thumbnail to middle of video
+                    e.target.currentTime = e.target.duration / 2;
+                  }}
+                  onError={(e) => {
+                    console.error('Video error:', video.src, e);
+                  }}
                 >
                   <source src={video.src} type="video/mp4" />
+                  Your browser does not support the video tag.
                 </video>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -92,8 +108,16 @@ export default function Home() {
                   controls
                   preload="metadata"
                   poster={video.poster}
+                  onLoadedMetadata={(e) => {
+                    // Set thumbnail to middle of video
+                    e.target.currentTime = e.target.duration / 2;
+                  }}
+                  onError={(e) => {
+                    console.error('Video error:', video.src, e);
+                  }}
                 >
                   <source src={video.src} type="video/mp4" />
+                  Your browser does not support the video tag.
                 </video>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -122,62 +146,76 @@ export default function Home() {
     </div>
   );
 
-  // Sample video filenames - replace with your actual uploaded videos
-  const horizontalVideos = [
-    "/videos/horizontal-1.mp4", "/videos/horizontal-2.mp4", "/videos/horizontal-3.mp4",
-    "/videos/horizontal-4.mp4", "/videos/horizontal-5.mp4", "/videos/horizontal-6.mp4",
-    "/videos/horizontal-7.mp4", "/videos/horizontal-8.mp4", "/videos/horizontal-9.mp4",
-    "/videos/horizontal-10.mp4", "/videos/horizontal-11.mp4", "/videos/horizontal-12.mp4",
-    "/videos/horizontal-13.mp4", "/videos/horizontal-14.mp4", "/videos/horizontal-15.mp4",
-    "/videos/horizontal-16.mp4"
+  // Auto-detect video orientation and create video lists
+  // Replace these with your actual uploaded video filenames
+  const allVideos = [
+    // Add your actual video filenames here - the system will auto-detect orientation
+    "video1.mp4", "video2.mp4", "video3.mp4", "video4.mp4", "video5.mp4",
+    "video6.mp4", "video7.mp4", "video8.mp4", "video9.mp4", "video10.mp4",
+    "video11.mp4", "video12.mp4", "video13.mp4", "video14.mp4", "video15.mp4",
+    "video16.mp4", "video17.mp4", "video18.mp4", "video19.mp4", "video20.mp4",
+    "video21.mp4", "video22.mp4", "video23.mp4", "video24.mp4", "video25.mp4",
+    "video26.mp4", "video27.mp4", "video28.mp4"
   ];
 
-  const verticalVideos = [
-    "/videos/vertical-1.mp4", "/videos/vertical-2.mp4", "/videos/vertical-3.mp4",
-    "/videos/vertical-4.mp4", "/videos/vertical-5.mp4", "/videos/vertical-6.mp4",
-    "/videos/vertical-7.mp4", "/videos/vertical-8.mp4", "/videos/vertical-9.mp4",
-    "/videos/vertical-10.mp4", "/videos/vertical-11.mp4", "/videos/vertical-12.mp4"
-  ];
+  // For now, manually separate by assuming filenames contain orientation hints
+  // You can update these arrays with your actual video filenames
+  const horizontalVideos = allVideos.filter(video =>
+    video.toLowerCase().includes('horizontal') ||
+    video.toLowerCase().includes('h_') ||
+    video.toLowerCase().includes('landscape') ||
+    !video.toLowerCase().includes('vertical') && !video.toLowerCase().includes('v_') && !video.toLowerCase().includes('portrait')
+  ).map(video => `/videos/${video}`);
+
+  const verticalVideos = allVideos.filter(video =>
+    video.toLowerCase().includes('vertical') ||
+    video.toLowerCase().includes('v_') ||
+    video.toLowerCase().includes('portrait')
+  ).map(video => `/videos/${video}`);
+
+  // Fallback: if no vertical videos detected, use first few as vertical
+  const finalVerticalVideos = verticalVideos.length > 0 ? verticalVideos : allVideos.slice(0, 12).map(video => `/videos/${video}`);
+  const finalHorizontalVideos = horizontalVideos.length > 0 ? horizontalVideos : allVideos.slice(12, 28).map(video => `/videos/${video}`);
 
   // Video data arrays - 7 videos each (2H + 3V + 2H pattern)
   const videoSet1 = [
-    { title: "AI Brand Campaign", src: horizontalVideos[0], poster: null },        // Horizontal 1
-    { title: "Product Showcase", src: horizontalVideos[1], poster: null },         // Horizontal 2
-    { title: "Social Media Ad", src: verticalVideos[0], poster: null },            // Vertical 1
-    { title: "E-commerce Spot", src: verticalVideos[1], poster: null },            // Vertical 2
-    { title: "Corporate Video", src: verticalVideos[2], poster: null },            // Vertical 3
-    { title: "Brand Identity", src: horizontalVideos[2], poster: null },           // Horizontal 3
-    { title: "Marketing Campaign", src: horizontalVideos[3], poster: null }        // Horizontal 4
+    { title: "AI Brand Campaign", src: finalHorizontalVideos[0], poster: null },        // Horizontal 1
+    { title: "Product Showcase", src: finalHorizontalVideos[1], poster: null },         // Horizontal 2
+    { title: "Social Media Ad", src: finalVerticalVideos[0], poster: null },            // Vertical 1
+    { title: "E-commerce Spot", src: finalVerticalVideos[1], poster: null },            // Vertical 2
+    { title: "Corporate Video", src: finalVerticalVideos[2], poster: null },            // Vertical 3
+    { title: "Brand Identity", src: finalHorizontalVideos[2], poster: null },           // Horizontal 3
+    { title: "Marketing Campaign", src: finalHorizontalVideos[3], poster: null }        // Horizontal 4
   ];
 
   const videoSet2 = [
-    { title: "Motion Graphics", src: horizontalVideos[4], poster: null },          // Horizontal 1
-    { title: "Logo Animation", src: horizontalVideos[5], poster: null },           // Horizontal 2
-    { title: "Instagram Story", src: verticalVideos[3], poster: null },            // Vertical 1
-    { title: "YouTube Pre-roll", src: verticalVideos[4], poster: null },           // Vertical 2
-    { title: "TikTok Ad", src: verticalVideos[5], poster: null },                  // Vertical 3
-    { title: "Facebook Ad", src: horizontalVideos[6], poster: null },              // Horizontal 3
-    { title: "LinkedIn Content", src: horizontalVideos[7], poster: null }          // Horizontal 4
+    { title: "Motion Graphics", src: finalHorizontalVideos[4], poster: null },          // Horizontal 1
+    { title: "Logo Animation", src: finalHorizontalVideos[5], poster: null },           // Horizontal 2
+    { title: "Instagram Story", src: finalVerticalVideos[3], poster: null },            // Vertical 1
+    { title: "YouTube Pre-roll", src: finalVerticalVideos[4], poster: null },           // Vertical 2
+    { title: "TikTok Ad", src: finalVerticalVideos[5], poster: null },                  // Vertical 3
+    { title: "Facebook Ad", src: finalHorizontalVideos[6], poster: null },              // Horizontal 3
+    { title: "LinkedIn Content", src: finalHorizontalVideos[7], poster: null }          // Horizontal 4
   ];
 
   const videoSet3 = [
-    { title: "AI Testimonial", src: horizontalVideos[8], poster: null },           // Horizontal 1
-    { title: "Product Demo", src: horizontalVideos[9], poster: null },             // Horizontal 2
-    { title: "Brand Story", src: verticalVideos[6], poster: null },                // Vertical 1
-    { title: "Event Promo", src: verticalVideos[7], poster: null },                // Vertical 2
-    { title: "Service Explainer", src: verticalVideos[8], poster: null },          // Vertical 3
-    { title: "Customer Journey", src: horizontalVideos[10], poster: null },        // Horizontal 3
-    { title: "Success Metrics", src: horizontalVideos[11], poster: null }          // Horizontal 4
+    { title: "AI Testimonial", src: finalHorizontalVideos[8], poster: null },           // Horizontal 1
+    { title: "Product Demo", src: finalHorizontalVideos[9], poster: null },             // Horizontal 2
+    { title: "Brand Story", src: finalVerticalVideos[6], poster: null },                // Vertical 1
+    { title: "Event Promo", src: finalVerticalVideos[7], poster: null },                // Vertical 2
+    { title: "Service Explainer", src: finalVerticalVideos[8], poster: null },          // Vertical 3
+    { title: "Customer Journey", src: finalHorizontalVideos[10], poster: null },        // Horizontal 3
+    { title: "Success Metrics", src: finalHorizontalVideos[11], poster: null }          // Horizontal 4
   ];
 
   const videoSet4 = [
-    { title: "App Launch", src: horizontalVideos[12], poster: null },              // Horizontal 1
-    { title: "Holiday Campaign", src: horizontalVideos[13], poster: null },        // Horizontal 2
-    { title: "Recruitment Ad", src: verticalVideos[9], poster: null },             // Vertical 1
-    { title: "Partnership Announce", src: verticalVideos[10], poster: null },      // Vertical 2
-    { title: "Success Story", src: verticalVideos[11], poster: null },             // Vertical 3
-    { title: "Company Culture", src: horizontalVideos[14], poster: null },         // Horizontal 3
-    { title: "Future Vision", src: horizontalVideos[15], poster: null }            // Horizontal 4
+    { title: "App Launch", src: finalHorizontalVideos[12], poster: null },              // Horizontal 1
+    { title: "Holiday Campaign", src: finalHorizontalVideos[13], poster: null },        // Horizontal 2
+    { title: "Recruitment Ad", src: finalVerticalVideos[9], poster: null },             // Vertical 1
+    { title: "Partnership Announce", src: finalVerticalVideos[10], poster: null },      // Vertical 2
+    { title: "Success Story", src: finalVerticalVideos[11], poster: null },             // Vertical 3
+    { title: "Company Culture", src: finalHorizontalVideos[14], poster: null },         // Horizontal 3
+    { title: "Future Vision", src: finalHorizontalVideos[15], poster: null }            // Horizontal 4
   ];
 
   return (
