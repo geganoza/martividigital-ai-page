@@ -146,36 +146,80 @@ export default function Home() {
     </div>
   );
 
-  // Auto-detect video orientation and create video lists
-  // Replace these with your actual uploaded video filenames
+  // Your actual uploaded video files from Google Drive
   const allVideos = [
-    // Add your actual video filenames here - the system will auto-detect orientation
-    "video1.mp4", "video2.mp4", "video3.mp4", "video4.mp4", "video5.mp4",
-    "video6.mp4", "video7.mp4", "video8.mp4", "video9.mp4", "video10.mp4",
-    "video11.mp4", "video12.mp4", "video13.mp4", "video14.mp4", "video15.mp4",
-    "video16.mp4", "video17.mp4", "video18.mp4", "video19.mp4", "video20.mp4",
-    "video21.mp4", "video22.mp4", "video23.mp4", "video24.mp4", "video25.mp4",
-    "video26.mp4", "video27.mp4", "video28.mp4"
+    "169_interior_a_202509102240.mp4",
+    "169_night_road_202509102237.mp4",
+    "169_night_road_202509102247.mp4",
+    "360_product_shot_202509112040-2.mp4",
+    "360_product_shot_202509112040.mp4",
+    "3d hair oil animation - Rofiqul Islam (1080p, h264).mp4",
+    "A_fashion_style_202509112038-2.mp4",
+    "A_fashion_style_202509112038.mp4",
+    "A_super_realistic_202509112334.mp4",
+    "A_timelapse_style_202509111604_fprz9.mp4",
+    "A_timelapse_style_202509111644_mbs7w.mp4",
+    "A_timelapse_style_202509111707.mp4",
+    "Abstract_light_beige_202509131106_c06r6.mp4",
+    "Abstract_light_beige_202509131108-2.mp4",
+    "Abstract_light_beige_202509131108.mp4",
+    "Abstract_white_environment_202509131116-2.mp4",
+    "Abstract_white_environment_202509131116.mp4",
+    "Abstract_white_environment_202509131120_rtk3h.mp4",
+    "Abstract_white_environment_202509131124.mp4",
+    "Abstract_white_environment_202509131222-2.mp4",
+    "Abstract_white_environment_202509131222.mp4",
+    "Abstract_white_environment_202509131226.mp4",
+    "Abstract_white_environment_202509131227.mp4",
+    "Colorful_super_realistic_202509111323_ngz7d.mp4",
+    "Colorful_super_realistic_202509111328.mp4",
+    "Colorful_super_realistic_202509111337-2.mp4",
+    "Colorful_super_realistic_202509111337.mp4",
+    "Ingredients_of_a_202509102255_kfwk8.mp4",
+    "Ingredients_of_a_202509111045.mp4",
+    "Milk_from_the_202509102317_30rnm.mp4",
+    "Milk_from_the_202509102317_uehaz.mp4",
+    "Paintbrushes_oil_paints_202509111339.mp4",
+    "Paintbrushes_oil_paints_202509111409.mp4",
+    "Paintbrushes_oil_paints_202509121129.mp4",
+    "Rice_butter_parmesan_202509111245-2.mp4",
+    "Rice_butter_parmesan_202509111245.mp4",
+    "Slow_pan_up_202509130013.mp4",
+    "Super_realistic_video_202509111707.mp4",
+    "Super_realistic_video_202509111931.mp4",
+    "Super_realistic_video_202509111957.mp4",
+    "Super_realistic_video_202509112004.mp4",
+    "This_is_a_202509111954.mp4",
+    "This_is_a_202509111957.mp4",
+    "Wide_shot_of_202509111300-2.mp4",
+    "Wide_shot_of_202509111300.mp4",
+    "Wide_shot_of_202509111301.mp4",
+    "Wide_shot_of_202509111306_eyv1m.mp4"
   ];
 
-  // For now, manually separate by assuming filenames contain orientation hints
-  // You can update these arrays with your actual video filenames
-  const horizontalVideos = allVideos.filter(video =>
-    video.toLowerCase().includes('horizontal') ||
-    video.toLowerCase().includes('h_') ||
-    video.toLowerCase().includes('landscape') ||
-    !video.toLowerCase().includes('vertical') && !video.toLowerCase().includes('v_') && !video.toLowerCase().includes('portrait')
-  ).map(video => `/videos/${video}`);
+  // Detect vertical videos (9:16 ratio)
+  const actualVerticalVideos = [
+    "Vertical_916_a_202509102235_wqpxr.mp4"
+  ];
 
-  const verticalVideos = allVideos.filter(video =>
-    video.toLowerCase().includes('vertical') ||
-    video.toLowerCase().includes('v_') ||
-    video.toLowerCase().includes('portrait')
-  ).map(video => `/videos/${video}`);
+  // All others are horizontal (16:9 ratio)
+  const actualHorizontalVideos = allVideos;
 
-  // Fallback: if no vertical videos detected, use first few as vertical
-  const finalVerticalVideos = verticalVideos.length > 0 ? verticalVideos : allVideos.slice(0, 12).map(video => `/videos/${video}`);
-  const finalHorizontalVideos = horizontalVideos.length > 0 ? horizontalVideos : allVideos.slice(12, 28).map(video => `/videos/${video}`);
+  // Create arrays with proper paths - repeat videos if needed to fill all slots
+  const finalVerticalVideos = [];
+  const finalHorizontalVideos = [];
+
+  // Fill vertical slots (need 12) - repeat the one vertical video
+  for (let i = 0; i < 12; i++) {
+    const videoIndex = i % actualVerticalVideos.length;
+    finalVerticalVideos.push(`/videos/${actualVerticalVideos[videoIndex]}`);
+  }
+
+  // Fill horizontal slots (need 16) - cycle through horizontal videos
+  for (let i = 0; i < 16; i++) {
+    const videoIndex = i % actualHorizontalVideos.length;
+    finalHorizontalVideos.push(`/videos/${actualHorizontalVideos[videoIndex]}`);
+  }
 
   // Video data arrays - 7 videos each (2H + 3V + 2H pattern)
   const videoSet1 = [
