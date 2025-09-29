@@ -199,7 +199,7 @@ export default function Home() {
             Ready to Transform Your Advertising?
           </h2>
           <p className="mt-3 text-neutral-300">
-            Let's discuss how AI can elevate your brand's creative campaigns.
+            Let&apos;s discuss how AI can elevate your brand&apos;s creative campaigns.
             Get in touch with our team for a personalized consultation.
           </p>
         </div>
