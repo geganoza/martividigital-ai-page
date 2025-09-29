@@ -319,6 +319,17 @@ export default function Home() {
           opacity: 1;
           transform: translateY(0);
         }
+        .animate-fade-in-up {
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInUp 1s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
       `}</style>
 
       {/* Hero / Large Banner */}
@@ -344,23 +355,56 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Main Banner Placeholder - 600px height */}
+      {/* Animated Main Banner - 600px height */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
-        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-fuchsia-600/10 to-cyan-600/10 border-2 border-dashed border-white/20 scroll-animate" style={{height: '600px'}}>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <div className="mx-auto mb-4 h-16 w-16 rounded-full border-2 border-dashed border-white/30 bg-white/5 flex items-center justify-center">
-                <span className="text-2xl">🖼️</span>
+        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-fuchsia-600/20 via-purple-600/20 to-cyan-600/20 border border-white/10 scroll-animate" style={{height: '600px'}}>
+          {/* Animated background elements */}
+          <div className="absolute inset-0">
+            {/* Floating orbs */}
+            <div className="absolute top-20 left-20 w-32 h-32 bg-fuchsia-500/30 rounded-full blur-xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-20 w-40 h-40 bg-cyan-500/30 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-40 right-40 w-24 h-24 bg-purple-500/30 rounded-full blur-xl animate-pulse" style={{animationDelay: '2s'}}></div>
+
+            {/* Moving gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent animate-pulse"></div>
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 flex items-center justify-center h-full px-8">
+            <div className="text-center max-w-4xl">
+              <div className="animate-fade-in-up">
+                <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-lg font-medium text-white/90 mb-8 animate-pulse">
+                  MARTIVI DIGITAL · AI Ads
+                </span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Main Banner Placeholder</h3>
-              <p className="text-sm text-neutral-400 max-w-md">
-                600px height banner space - Perfect for hero videos, main campaign visuals, or key messaging
+
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 animate-fade-in-up" style={{animationDelay: '0.5s'}}>
+                <span className="bg-gradient-to-r from-fuchsia-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  AI-Powered
+                </span>
+                <br />
+                <span className="text-white">Advertising</span>
+              </h1>
+
+              <p className="text-xl md:text-2xl leading-relaxed text-neutral-300 mb-8 animate-fade-in-up" style={{animationDelay: '1s'}}>
+                Fast, affordable, and effective AI-generated content with professional human touch.
+                <br />
+                <span className="text-fuchsia-400 font-semibold">Transform your advertising</span> with our hybrid approach.
               </p>
-              <div className="mt-4 text-xs text-neutral-500">
-                Dimensions: Full width × 600px height
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{animationDelay: '1.5s'}}>
+                <button className="px-8 py-4 bg-gradient-to-r from-fuchsia-600 to-cyan-600 text-white font-semibold rounded-lg hover:from-fuchsia-500 hover:to-cyan-500 transition-all duration-300 transform hover:scale-105">
+                  See Our Work
+                </button>
+                <button className="px-8 py-4 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300">
+                  Get Started
+                </button>
               </div>
             </div>
           </div>
+
+          {/* Animated border effect */}
+          <div className="absolute inset-0 rounded-xl border border-transparent bg-gradient-to-r from-fuchsia-500/50 via-purple-500/50 to-cyan-500/50 opacity-20 animate-pulse"></div>
         </div>
       </section>
 
