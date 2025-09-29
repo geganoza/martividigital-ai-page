@@ -31,17 +31,34 @@ export default function Home() {
           {horizontalVideos1.map((video, index) => (
             <div key={index} className="relative overflow-hidden rounded-lg bg-black aspect-video">
               {video.src ? (
-                <video
-                  className="absolute inset-0 h-full w-full object-cover"
-                  controls
-                  preload="metadata"
-                  onError={(e) => {
-                    console.error('Video error:', video.src, e);
-                  }}
-                >
-                  <source src={video.src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div className="absolute inset-0">
+                  <video
+                    className="absolute inset-0 h-full w-full object-cover"
+                    controls
+                    preload="none"
+                    onLoadStart={(e) => {
+                      // Hide placeholder when video starts loading
+                      const placeholder = e.target.nextElementSibling;
+                      if (placeholder) placeholder.style.display = 'none';
+                    }}
+                    onError={(e) => {
+                      console.error('Video error:', video.src, e);
+                    }}
+                  >
+                    <source src={video.src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  {/* Placeholder overlay - hidden when video starts loading */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center pointer-events-none">
+                    <div className="text-center">
+                      <div className="mx-auto mb-3 h-16 w-16 rounded-full border-2 border-white/30 bg-white/10 flex items-center justify-center">
+                        <span className="text-2xl">▶</span>
+                      </div>
+                      <p className="text-sm text-white/80 font-medium">{video.title}</p>
+                      <p className="text-xs text-white/50 mt-1">Click to play</p>
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
@@ -62,17 +79,34 @@ export default function Home() {
           {verticalVideos.map((video, index) => (
             <div key={index + 2} className="relative overflow-hidden rounded-lg bg-black aspect-[9/16]">
               {video.src ? (
-                <video
-                  className="absolute inset-0 h-full w-full object-cover"
-                  controls
-                  preload="metadata"
-                  onError={(e) => {
-                    console.error('Video error:', video.src, e);
-                  }}
-                >
-                  <source src={video.src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div className="absolute inset-0">
+                  <video
+                    className="absolute inset-0 h-full w-full object-cover"
+                    controls
+                    preload="none"
+                    onLoadStart={(e) => {
+                      // Hide placeholder when video starts loading
+                      const placeholder = e.target.nextElementSibling;
+                      if (placeholder) placeholder.style.display = 'none';
+                    }}
+                    onError={(e) => {
+                      console.error('Video error:', video.src, e);
+                    }}
+                  >
+                    <source src={video.src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  {/* Placeholder overlay - hidden when video starts loading */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center pointer-events-none">
+                    <div className="text-center">
+                      <div className="mx-auto mb-3 h-16 w-16 rounded-full border-2 border-white/30 bg-white/10 flex items-center justify-center">
+                        <span className="text-2xl">▶</span>
+                      </div>
+                      <p className="text-sm text-white/80 font-medium">{video.title}</p>
+                      <p className="text-xs text-white/50 mt-1">Click to play</p>
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
@@ -93,17 +127,34 @@ export default function Home() {
           {horizontalVideos2.map((video, index) => (
             <div key={index + 5} className="relative overflow-hidden rounded-lg bg-black aspect-video">
               {video.src ? (
-                <video
-                  className="absolute inset-0 h-full w-full object-cover"
-                  controls
-                  preload="metadata"
-                  onError={(e) => {
-                    console.error('Video error:', video.src, e);
-                  }}
-                >
-                  <source src={video.src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div className="absolute inset-0">
+                  <video
+                    className="absolute inset-0 h-full w-full object-cover"
+                    controls
+                    preload="none"
+                    onLoadStart={(e) => {
+                      // Hide placeholder when video starts loading
+                      const placeholder = e.target.nextElementSibling;
+                      if (placeholder) placeholder.style.display = 'none';
+                    }}
+                    onError={(e) => {
+                      console.error('Video error:', video.src, e);
+                    }}
+                  >
+                    <source src={video.src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  {/* Placeholder overlay - hidden when video starts loading */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center pointer-events-none">
+                    <div className="text-center">
+                      <div className="mx-auto mb-3 h-16 w-16 rounded-full border-2 border-white/30 bg-white/10 flex items-center justify-center">
+                        <span className="text-2xl">▶</span>
+                      </div>
+                      <p className="text-sm text-white/80 font-medium">{video.title}</p>
+                      <p className="text-xs text-white/50 mt-1">Click to play</p>
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
