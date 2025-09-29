@@ -19,20 +19,17 @@ export default function Home() {
     return () => observerRef.current.disconnect();
   }, []);
 
-  const VideoGrid = ({ videos, pattern = "2h1v2h" }) => {
+  const VideoGrid = ({ videos }) => {
+    const horizontalVideos1 = videos.slice(0, 2); // First 2 videos are horizontal
+    const verticalVideos = videos.slice(2, 5);    // Next 3 videos are vertical
+    const horizontalVideos2 = videos.slice(5, 7); // Last 2 videos are horizontal
+
     return (
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-8 scroll-animate">
-        {pattern === "2h1v2h" && videos.map((video, index) => {
-          const isVertical = index === 2; // Middle video is vertical
-          return (
-            <div
-              key={index}
-              className={`relative overflow-hidden rounded-lg bg-black/40 ${
-                isVertical
-                  ? 'lg:col-span-1 aspect-[9/16]' // Vertical: 9:16 ratio, 1 column
-                  : 'lg:col-span-2 aspect-video'   // Horizontal: 16:9 ratio, 2 columns
-              }`}
-            >
+      <div className="mb-12 scroll-animate">
+        {/* Row 1: 2 Horizontal Videos Side by Side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          {horizontalVideos1.map((video, index) => (
+            <div key={index} className="relative overflow-hidden rounded-lg bg-black/40 aspect-video">
               {video.src ? (
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
@@ -48,16 +45,70 @@ export default function Home() {
                     <div className="mx-auto mb-2 h-12 w-12 rounded-full border border-white/20 bg-white/10 flex items-center justify-center">
                       <span className="text-xl">▶</span>
                     </div>
-                    <p className="text-xs text-neutral-300">
-                      {isVertical ? 'Vertical Video (9:16)' : 'Horizontal Video (16:9)'}
-                    </p>
+                    <p className="text-xs text-neutral-300">Horizontal Video (16:9)</p>
                     <p className="text-xs text-neutral-400 mt-1">{video.title}</p>
                   </div>
                 </div>
               )}
             </div>
-          );
-        })}
+          ))}
+        </div>
+
+        {/* Row 2: 3 Vertical Videos Side by Side */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          {verticalVideos.map((video, index) => (
+            <div key={index + 2} className="relative overflow-hidden rounded-lg bg-black/40 aspect-[9/16]">
+              {video.src ? (
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  controls
+                  preload="metadata"
+                  poster={video.poster}
+                >
+                  <source src={video.src} type="video/mp4" />
+                </video>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="mx-auto mb-2 h-8 w-8 rounded-full border border-white/20 bg-white/10 flex items-center justify-center">
+                      <span className="text-sm">▶</span>
+                    </div>
+                    <p className="text-xs text-neutral-300">Vertical Video (9:16)</p>
+                    <p className="text-xs text-neutral-400 mt-1">{video.title}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Row 3: 2 Horizontal Videos Side by Side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {horizontalVideos2.map((video, index) => (
+            <div key={index + 5} className="relative overflow-hidden rounded-lg bg-black/40 aspect-video">
+              {video.src ? (
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  controls
+                  preload="metadata"
+                  poster={video.poster}
+                >
+                  <source src={video.src} type="video/mp4" />
+                </video>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="mx-auto mb-2 h-12 w-12 rounded-full border border-white/20 bg-white/10 flex items-center justify-center">
+                      <span className="text-xl">▶</span>
+                    </div>
+                    <p className="text-xs text-neutral-300">Horizontal Video (16:9)</p>
+                    <p className="text-xs text-neutral-400 mt-1">{video.title}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     );
   };
@@ -71,37 +122,45 @@ export default function Home() {
     </div>
   );
 
-  // Video data arrays
+  // Video data arrays - 7 videos each (2H + 3V + 2H pattern)
   const videoSet1 = [
-    { title: "AI Brand Campaign", src: null, poster: null },
-    { title: "Product Showcase", src: null, poster: null },
-    { title: "Social Media Ad", src: null, poster: null },
-    { title: "E-commerce Spot", src: null, poster: null },
-    { title: "Corporate Video", src: null, poster: null }
+    { title: "AI Brand Campaign", src: null, poster: null },        // Horizontal 1
+    { title: "Product Showcase", src: null, poster: null },         // Horizontal 2
+    { title: "Social Media Ad", src: null, poster: null },          // Vertical 1
+    { title: "E-commerce Spot", src: null, poster: null },          // Vertical 2
+    { title: "Corporate Video", src: null, poster: null },          // Vertical 3
+    { title: "Brand Identity", src: null, poster: null },           // Horizontal 3
+    { title: "Marketing Campaign", src: null, poster: null }        // Horizontal 4
   ];
 
   const videoSet2 = [
-    { title: "Motion Graphics", src: null, poster: null },
-    { title: "Logo Animation", src: null, poster: null },
-    { title: "Instagram Story", src: null, poster: null },
-    { title: "YouTube Pre-roll", src: null, poster: null },
-    { title: "TikTok Ad", src: null, poster: null }
+    { title: "Motion Graphics", src: null, poster: null },          // Horizontal 1
+    { title: "Logo Animation", src: null, poster: null },           // Horizontal 2
+    { title: "Instagram Story", src: null, poster: null },          // Vertical 1
+    { title: "YouTube Pre-roll", src: null, poster: null },         // Vertical 2
+    { title: "TikTok Ad", src: null, poster: null },                // Vertical 3
+    { title: "Facebook Ad", src: null, poster: null },              // Horizontal 3
+    { title: "LinkedIn Content", src: null, poster: null }          // Horizontal 4
   ];
 
   const videoSet3 = [
-    { title: "AI Testimonial", src: null, poster: null },
-    { title: "Product Demo", src: null, poster: null },
-    { title: "Brand Story", src: null, poster: null },
-    { title: "Event Promo", src: null, poster: null },
-    { title: "Service Explainer", src: null, poster: null }
+    { title: "AI Testimonial", src: null, poster: null },           // Horizontal 1
+    { title: "Product Demo", src: null, poster: null },             // Horizontal 2
+    { title: "Brand Story", src: null, poster: null },              // Vertical 1
+    { title: "Event Promo", src: null, poster: null },              // Vertical 2
+    { title: "Service Explainer", src: null, poster: null },        // Vertical 3
+    { title: "Customer Journey", src: null, poster: null },         // Horizontal 3
+    { title: "Success Metrics", src: null, poster: null }           // Horizontal 4
   ];
 
   const videoSet4 = [
-    { title: "App Launch", src: null, poster: null },
-    { title: "Holiday Campaign", src: null, poster: null },
-    { title: "Recruitment Ad", src: null, poster: null },
-    { title: "Partnership Announce", src: null, poster: null },
-    { title: "Success Story", src: null, poster: null }
+    { title: "App Launch", src: null, poster: null },               // Horizontal 1
+    { title: "Holiday Campaign", src: null, poster: null },         // Horizontal 2
+    { title: "Recruitment Ad", src: null, poster: null },           // Vertical 1
+    { title: "Partnership Announce", src: null, poster: null },     // Vertical 2
+    { title: "Success Story", src: null, poster: null },            // Vertical 3
+    { title: "Company Culture", src: null, poster: null },          // Horizontal 3
+    { title: "Future Vision", src: null, poster: null }             // Horizontal 4
   ];
 
   return (
@@ -141,6 +200,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Main Banner Placeholder - 600px height */}
+      <section className="mx-auto max-w-7xl px-6 pb-16">
+        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-fuchsia-600/10 to-cyan-600/10 border-2 border-dashed border-white/20 scroll-animate" style={{height: '600px'}}>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="mx-auto mb-4 h-16 w-16 rounded-full border-2 border-dashed border-white/30 bg-white/5 flex items-center justify-center">
+                <span className="text-2xl">🖼️</span>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Main Banner Placeholder</h3>
+              <p className="text-sm text-neutral-400 max-w-md">
+                600px height banner space - Perfect for hero videos, main campaign visuals, or key messaging
+              </p>
+              <div className="mt-4 text-xs text-neutral-500">
+                Dimensions: Full width × 600px height
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Message */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
         <div className="max-w-4xl scroll-animate">
@@ -169,7 +248,7 @@ export default function Home() {
           OUR WORKS
         </h2>
 
-        {/* Video Set 1 - 2H-1V-2H Pattern */}
+        {/* Video Set 1 - Row 1: 2H, Row 2: 3V */}
         <VideoGrid videos={videoSet1} />
 
         {/* Banner 1 */}
