@@ -35,9 +35,6 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
-                  onError={(e) => {
-                    console.error('Video error:', video.src, e.target.error);
-                  }}
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -66,9 +63,6 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
-                  onError={(e) => {
-                    console.error('Video error:', video.src, e.target.error);
-                  }}
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -97,9 +91,6 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover"
                   controls
                   preload="metadata"
-                  onError={(e) => {
-                    console.error('Video error:', video.src, e.target.error);
-                  }}
                 >
                   <source src={video.src} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -330,50 +321,50 @@ export default function Home() {
             transform: translateY(0);
           }
         }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        @keyframes wave {
+          0% { transform: translateX(-100%) translateY(0); }
+          50% { transform: translateX(100%) translateY(-10px); }
+          100% { transform: translateX(-100%) translateY(0); }
+        }
+        @keyframes drift {
+          0% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -30px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0, 0) scale(1); }
+        }
       `}</style>
 
-      {/* Hero / Large Banner */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute -top-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-fuchsia-500/20 blur-3xl"></div>
-          <div className="absolute -bottom-24 right-1/3 h-72 w-[36rem] rounded-full bg-cyan-500/20 blur-3xl"></div>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-6 pt-20 pb-14 sm:pt-28 sm:pb-20">
-          <div className="max-w-4xl scroll-animate">
-            <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/80">
-              MARTIVI DIGITAL · AI Ads
-            </span>
-            <h1 className="mt-6 text-5xl font-bold tracking-tight sm:text-7xl">
-              AI-Powered Advertising
-            </h1>
-            <p className="mt-6 text-xl leading-8 text-neutral-300 sm:text-2xl">
-              Fast, affordable, and effective AI-generated content with professional human touch.
-              Transform your advertising with our hybrid approach.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Animated Main Banner - 600px height */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
         <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-fuchsia-600/20 via-purple-600/20 to-cyan-600/20 border border-white/10 scroll-animate" style={{height: '600px'}}>
           {/* Animated background elements */}
           <div className="absolute inset-0">
-            {/* Floating orbs */}
-            <div className="absolute top-20 left-20 w-32 h-32 bg-fuchsia-500/30 rounded-full blur-xl animate-pulse"></div>
-            <div className="absolute bottom-20 right-20 w-40 h-40 bg-cyan-500/30 rounded-full blur-xl animate-pulse" style={{animationDelay: '1s'}}></div>
-            <div className="absolute top-40 right-40 w-24 h-24 bg-purple-500/30 rounded-full blur-xl animate-pulse" style={{animationDelay: '2s'}}></div>
+            {/* Floating orbs with smooth motion */}
+            <div className="absolute top-20 left-20 w-32 h-32 bg-fuchsia-500/30 rounded-full blur-xl" style={{animation: 'drift 8s ease-in-out infinite'}}></div>
+            <div className="absolute bottom-20 right-20 w-40 h-40 bg-cyan-500/30 rounded-full blur-xl" style={{animation: 'float 6s ease-in-out infinite', animationDelay: '2s'}}></div>
+            <div className="absolute top-40 right-40 w-24 h-24 bg-purple-500/30 rounded-full blur-xl" style={{animation: 'drift 10s ease-in-out infinite', animationDelay: '4s'}}></div>
+            <div className="absolute bottom-40 left-40 w-28 h-28 bg-yellow-500/20 rounded-full blur-xl" style={{animation: 'float 7s ease-in-out infinite', animationDelay: '1s'}}></div>
 
-            {/* Moving gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent animate-pulse"></div>
+            {/* Flowing wave elements */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-1/4 w-full h-20 bg-gradient-to-r from-transparent via-fuchsia-500/10 to-transparent" style={{animation: 'wave 12s linear infinite'}}></div>
+              <div className="absolute top-3/4 w-full h-16 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent" style={{animation: 'wave 15s linear infinite', animationDelay: '-5s'}}></div>
+            </div>
+
+            {/* Subtle moving gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/3 to-transparent" style={{animation: 'drift 20s ease-in-out infinite'}}></div>
           </div>
 
           {/* Content */}
           <div className="relative z-10 flex items-center justify-center h-full px-8">
             <div className="text-center max-w-4xl">
               <div className="animate-fade-in-up">
-                <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-lg font-medium text-white/90 mb-8 animate-pulse">
+                <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-lg font-medium text-white/90 mb-8">
                   MARTIVI DIGITAL · AI Ads
                 </span>
               </div>
@@ -404,7 +395,7 @@ export default function Home() {
           </div>
 
           {/* Animated border effect */}
-          <div className="absolute inset-0 rounded-xl border border-transparent bg-gradient-to-r from-fuchsia-500/50 via-purple-500/50 to-cyan-500/50 opacity-20 animate-pulse"></div>
+          <div className="absolute inset-0 rounded-xl border border-transparent bg-gradient-to-r from-fuchsia-500/50 via-purple-500/50 to-cyan-500/50 opacity-20"></div>
         </div>
       </section>
 
