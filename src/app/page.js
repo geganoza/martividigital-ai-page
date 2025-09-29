@@ -197,13 +197,61 @@ export default function Home() {
     "Wide_shot_of_202509111306_eyv1m.mp4"
   ];
 
-  // Detect vertical videos (9:16 ratio)
+  // Vertical videos (720x1280 - 9:16 ratio) - confirmed by ffprobe
   const actualVerticalVideos = [
-    "Vertical_916_a_202509102235_wqpxr.mp4"
+    "A_timelapse_style_202509111604_fprz9.mp4",
+    "A_timelapse_style_202509111644_mbs7w.mp4",
+    "Colorful_super_realistic_202509111323_ngz7d.mp4",
+    "Milk_from_the_202509102317_30rnm.mp4",
+    "Milk_from_the_202509102317_uehaz.mp4",
+    "Vertical_916_a_202509102235_wqpxr.mp4",
+    "Wide_shot_of_202509111306_eyv1m.mp4"
   ];
 
-  // All others are horizontal (16:9 ratio)
-  const actualHorizontalVideos = allVideos;
+  // Horizontal videos (1920x1088, 1280x720, 1080x1080 - 16:9 and square ratios)
+  const actualHorizontalVideos = [
+    "169_interior_a_202509102240.mp4",
+    "169_night_road_202509102237.mp4",
+    "169_night_road_202509102247.mp4",
+    "360_product_shot_202509112040-2.mp4",
+    "360_product_shot_202509112040.mp4",
+    "3d hair oil animation - Rofiqul Islam (1080p, h264).mp4",
+    "A_fashion_style_202509112038-2.mp4",
+    "A_fashion_style_202509112038.mp4",
+    "A_super_realistic_202509112334.mp4",
+    "A_timelapse_style_202509111707.mp4",
+    "Abstract_light_beige_202509131106_c06r6.mp4",
+    "Abstract_light_beige_202509131108-2.mp4",
+    "Abstract_light_beige_202509131108.mp4",
+    "Abstract_white_environment_202509131116-2.mp4",
+    "Abstract_white_environment_202509131116.mp4",
+    "Abstract_white_environment_202509131120_rtk3h.mp4",
+    "Abstract_white_environment_202509131124.mp4",
+    "Abstract_white_environment_202509131222-2.mp4",
+    "Abstract_white_environment_202509131222.mp4",
+    "Abstract_white_environment_202509131226.mp4",
+    "Abstract_white_environment_202509131227.mp4",
+    "Colorful_super_realistic_202509111328.mp4",
+    "Colorful_super_realistic_202509111337-2.mp4",
+    "Colorful_super_realistic_202509111337.mp4",
+    "Ingredients_of_a_202509102255_kfwk8.mp4",
+    "Ingredients_of_a_202509111045.mp4",
+    "Paintbrushes_oil_paints_202509111339.mp4",
+    "Paintbrushes_oil_paints_202509111409.mp4",
+    "Paintbrushes_oil_paints_202509121129.mp4",
+    "Rice_butter_parmesan_202509111245-2.mp4",
+    "Rice_butter_parmesan_202509111245.mp4",
+    "Slow_pan_up_202509130013.mp4",
+    "Super_realistic_video_202509111707.mp4",
+    "Super_realistic_video_202509111931.mp4",
+    "Super_realistic_video_202509111957.mp4",
+    "Super_realistic_video_202509112004.mp4",
+    "This_is_a_202509111954.mp4",
+    "This_is_a_202509111957.mp4",
+    "Wide_shot_of_202509111300-2.mp4",
+    "Wide_shot_of_202509111300.mp4",
+    "Wide_shot_of_202509111301.mp4"
+  ];
 
   // Create arrays with proper paths - repeat videos if needed to fill all slots
   const finalVerticalVideos = [];
